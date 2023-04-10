@@ -40,8 +40,9 @@ function App() {
     // setSearchProduct(searchProduct);
   })
 
-
+  console.log = function() {};
   useEffect(()=>{
+    
     axios.get(process.env.REACT_APP_API_URL + `/products`).then((data) => {
       console.log(data);
       setAllProduct(data.data)

@@ -13,7 +13,7 @@ const Shop = ({ addToCart, shopItems, allProduct, searchProduct }) => {
           <div >
             <div className='heading d_flex'>
               <div className='heading-left row  f_flex'>
-                <h2>Todos os Produtos</h2>
+                <h2 id="allProduct">Todos os Produtos</h2>
               </div>
               <div className='heading-right row '>
                 <span>Ver Todas</span>
