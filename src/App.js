@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./App.css"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./common/header/Header"
@@ -7,6 +7,7 @@ import Data from "./components/Data"
 import Cart from "./common/Cart/Cart"
 import Footer from "./common/footer/Footer"
 import Sdata from "./components/shops/Sdata"
+import axios from "axios"
 
 function App() {
   /*
@@ -24,13 +25,61 @@ function App() {
   //Step 1 :
   const { productItems } = Data
   const { shopItems } = Sdata
+    const user_id =Number(process.env.REACT_APP_USER_ID);
+  
 
   //Step 2 :
   const [CartItem, setCartItem] = useState([])
+  const [allProduct, setAllProduct] = useState(null);
+
+
+  useEffect(()=>{
+    axios.get(process.env.REACT_APP_API_URL + `/products`).then((data) => {
+      console.log(data);
+      setAllProduct(data.data)
+      
+    }, (error)=>{
+      console.log(error);
+    });
+    
+  }, [])
+
+
+
+
+  function addCart(product_id, supplier_id, price, image, name){
+    
+        const json = {
+          "user_id" : user_id,
+          "product_id": product_id,
+          "supplier_id": supplier_id,
+          "price": price,
+          "image": image,
+          "name": name
+        }
+
+    
+        axios.post(`http://devnology.test/api/carts/store`, json).then((data) => {
+          console.log(data);
+          
+          
+        }, (error)=>{
+          console.log(error);
+        });
+      }
+
 
   //Step 4 :
   const addToCart = (product) => {
     // if hamro product alredy cart xa bhane  find garna help garxa
+
+    
+
+
+
+
+    addCart(product.id,product.supplier_id, product.price, product.images[0], product.name);
+
     const productExit = CartItem.find((item) => item.id === product.id)
     // if productExit chai alredy exit in cart then will run fun() => setCartItem
     // ani inside => setCartItem will run => map() ani yo map() chai each cart ma
@@ -76,7 +125,7 @@ function App() {
             <Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
           </Route>
           <Route path='/cart' exact>
-            <Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
+            <Cart AllProduct={allProduct} CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
           </Route>
         </Switch>
         <Footer />

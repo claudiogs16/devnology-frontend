@@ -12,7 +12,7 @@ const SlideCard = () => {
 
 
   useEffect(()=>{
-    axios.get(`http://devnology.test/api/products`).then((data) => {
+    axios.get(process.env.REACT_APP_API_URL + `/products`).then((data) => {
       console.log(data);
       setAllProduct(data.data)
       

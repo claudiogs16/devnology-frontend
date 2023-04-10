@@ -2,8 +2,16 @@ import React, { useState } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import axios from "axios"
+import { useEffect } from "react"
 
 const SampleNextArrow = (props) => {
+
+
+
+
+  
+
   const { onClick } = props
   return (
     <div className='control-btn' onClick={onClick}>
@@ -25,8 +33,27 @@ const SamplePrevArrow = (props) => {
 }
 const FlashCard = ({ productItems, addToCart }) => {
   const [count, setCount] = useState(0)
+  const [allProduct, setAllProduct] = useState(null);
+
+  const user_id = 2;
+
+  useEffect(()=>{
+    axios.get(process.env.REACT_APP_API_URL + `/products`).then((data) => {
+      console.log(data);
+      setAllProduct(data.data)
+      
+    }, (error)=>{
+      console.log(error);
+    });
+  }, [])
+
+
+  
+
   const increment = () => {
-    setCount(count + 1)
+    
+    setCount(count + 1);
+    
   }
   const settings = {
     dots: false,
@@ -41,13 +68,13 @@ const FlashCard = ({ productItems, addToCart }) => {
   return (
     <>
       <Slider {...settings}>
-        {productItems.map((productItems) => {
+        {allProduct?.map((productItems) => {
           return (
             <div className='box'>
               <div className='product mtop'>
                 <div className='img'>
-                  <span className='discount'>{productItems.discount}% Off</span>
-                  <img src={productItems.cover} alt='' />
+                  <span className='discount'>{productItems.discountValue}% Off</span>
+                  <img className="image" src={productItems.images[0]} alt='' />
                   <div className='product-like'>
                     <label>{count}</label> <br />
                     <i className='fa-regular fa-heart' onClick={increment}></i>
@@ -63,7 +90,7 @@ const FlashCard = ({ productItems, addToCart }) => {
                     <i className='fa fa-star'></i>
                   </div>
                   <div className='price'>
-                    <h4>${productItems.price}.00 </h4>
+                    <h4>{productItems.price}.00 </h4>
                     {/* step : 3  
                      if hami le button ma click garryo bahne 
                     */}

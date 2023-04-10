@@ -3,11 +3,12 @@ import axios from 'axios';
 
 const Head = () => {
   const [userData, setUserData] = useState(null);
-  const user_id = 2;
+ 
+  const user_id = process.env.REACT_APP_USER_ID;
 
   useEffect(()=>{
     
-    axios.get(`http://devnology.test/api/users/${user_id}`).then((data) => {
+    axios.get(process.env.REACT_APP_API_URL + `/users/${user_id}`).then((data) => {
       // console.log(data);
       setUserData(data.data);
       
