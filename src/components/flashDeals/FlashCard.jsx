@@ -64,7 +64,7 @@ const FlashCard = ({ productItems, addToCart, allProduct }) => {
             <div className='box'>
               <div className='product mtop'>
                 <div className='img'>
-                  <span className='discount'>{productItems.discountValue}% Off</span>
+                  <span className='discount'>{productItems.discountValue * 100}% Off</span>
                   <img className="image" src={productItems.images[0]} alt='' />
                   <div className='product-like'>
                     <label>{count}</label> <br />
