@@ -8,17 +8,17 @@ import Shop from "../components/shops/Shop"
 import Annocument from "../components/annocument/Annocument"
 import Wrapper from "../components/wrapper/Wrapper"
 
-const Pages = ({ productItems, addToCart, CartItem, shopItems }) => {
+const Pages = ({ productItems, addToCart, CartItem, shopItems, allProduct }) => {
   return (
     <>
-      <Home CartItem={CartItem} />
-      <FlashDeals productItems={productItems} addToCart={addToCart} />
-      <TopCate />
-      <NewArrivals />
-      <Discount />
-      <Shop shopItems={shopItems} addToCart={addToCart} />
-      <Annocument />
-      <Wrapper />
+      <Home allProduct={allProduct} CartItem={CartItem} />
+      <FlashDeals allProduct={allProduct} productItems={productItems} addToCart={addToCart} />
+      {/* <TopCate /> */}
+      {/* <NewArrivals /> */}
+      {/* <Discount /> */}
+      <Shop allProduct={allProduct} shopItems={shopItems} addToCart={addToCart} />
+      {/* <Annocument /> */}
+      {/* <Wrapper /> */}
     </>
   )
 }

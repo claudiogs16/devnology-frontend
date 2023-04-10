@@ -31,22 +31,13 @@ const SamplePrevArrow = (props) => {
     </div>
   )
 }
-const FlashCard = ({ productItems, addToCart }) => {
+const FlashCard = ({ productItems, addToCart, allProduct }) => {
   const [count, setCount] = useState(0)
-  const [allProduct, setAllProduct] = useState(null);
+  
 
   const user_id = 2;
 
-  useEffect(()=>{
-    axios.get(process.env.REACT_APP_API_URL + `/products`).then((data) => {
-      console.log(data);
-      setAllProduct(data.data)
-      
-    }, (error)=>{
-      console.log(error);
-    });
-  }, [])
-
+  
 
   
 

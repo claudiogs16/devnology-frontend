@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const FlashDeals = ({ productItems, addToCart }) => {
+const FlashDeals = ({ productItems, addToCart, allProduct }) => {
 
   
 
@@ -17,7 +17,7 @@ const FlashDeals = ({ productItems, addToCart }) => {
             <i className='fa fa-bolt'></i>
             <h1>Mais vendidos</h1>
           </div>
-          <FlashCard productItems={productItems} addToCart={addToCart} />
+          <FlashCard allProduct={allProduct} productItems={productItems} addToCart={addToCart} />
         </div>
       </section>
     </>

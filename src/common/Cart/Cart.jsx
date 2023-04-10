@@ -74,6 +74,44 @@ const Cart = ({ CartItem, AllProduct }) => {
 
 
 
+  const createOrder = (product) => {
+
+    let newOrder = allUserCart.map(item => ({
+      
+      product_id: item.product_id,
+      supplier_id: item.supplier_id,
+      name: item.name,
+      description: item.description,
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image,
+
+    
+  }))
+
+
+  let json = {
+    'orders': newOrder,
+  }
+
+  
+
+
+  axios.post(process.env.REACT_APP_API_URL + `/orders/${user_id}`, json ).then((data) => {
+    console.log(data.data);
+    loadAllUserCart();
+  }, (error)=>{
+    console.log(error);
+  });
+
+
+
+    console.clear();
+    console.log(json);
+  }
+
+
+
 
   // prodcut qty total
   return (
@@ -135,8 +173,16 @@ const Cart = ({ CartItem, AllProduct }) => {
             <div className=' d_flex'>
               <h4>Valor Total :</h4>
               <h3>${totalPrice}.00</h3>
+              
             </div>
+            <div className="d-button">
+            
+            {allUserCart?.length !== 0 && <button className='btn-primary btn-card' onClick={()=> createOrder()}>Finalizar Compra</button>}
+            
+            </div>
+            
           </div>
+          
         </div>
       </section>
     </>

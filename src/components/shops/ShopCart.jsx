@@ -46,7 +46,7 @@
 
 import React, { useState } from "react"
 
-const ShopCart = ({ shopItems, addToCart }) => {
+const ShopCart = ({ shopItems, addToCart, allProduct }) => {
   const [count, setCount] = useState(0)
   const increment = () => {
     setCount(count + 1)
@@ -54,13 +54,13 @@ const ShopCart = ({ shopItems, addToCart }) => {
 
   return (
     <>
-      {shopItems.map((shopItems, index) => {
+      {allProduct?.map((shopItems, index) => {
         return (
           <div className='box'>
             <div className='product mtop'>
               <div className='img'>
-                <span className='discount'>{shopItems.discount}% Off</span>
-                <img src={shopItems.cover} alt='' />
+                <span className='discount'>{shopItems.discountValue}% Off</span>
+                <img src={shopItems.images[0]} alt='' />
                 <div className='product-like'>
                   <label>{count}</label> <br />
                   <i className='fa-regular fa-heart' onClick={increment}></i>

@@ -47,7 +47,7 @@ function App() {
 
 
 
-  function addCart(product_id, supplier_id, price, image, name){
+  function addCart(product_id, supplier_id, price, image, name, description){
     
         const json = {
           "user_id" : user_id,
@@ -55,7 +55,8 @@ function App() {
           "supplier_id": supplier_id,
           "price": price,
           "image": image,
-          "name": name
+          "name": name,
+          "description": description
         }
 
     
@@ -78,7 +79,7 @@ function App() {
 
 
 
-    addCart(product.id,product.supplier_id, product.price, product.images[0], product.name);
+    addCart(product.id,product.supplier_id, product.price, product.images[0], product.name, product.description);
 
     const productExit = CartItem.find((item) => item.id === product.id)
     // if productExit chai alredy exit in cart then will run fun() => setCartItem
@@ -122,7 +123,7 @@ function App() {
         <Header CartItem={CartItem} />
         <Switch>
           <Route path='/' exact>
-            <Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
+            <Pages allProduct={allProduct} productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
           </Route>
           <Route path='/cart' exact>
             <Cart AllProduct={allProduct} CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
