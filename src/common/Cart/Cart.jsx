@@ -139,8 +139,9 @@ const Cart = ({ CartItem, AllProduct }) => {
                   <div className='cart-details'>
                     <h3>{item.name}</h3>
                     <h4>
-                      ${item.price}.00 * {item.quantity}
-                      <span>${item.price * productQty}.00</span>
+                      {item.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} * {item.quantity}
+                      <span>{(item.price * productQty).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                     
                     </h4>
                   </div>
                   <div className='cart-items-function'>
@@ -172,7 +173,7 @@ const Cart = ({ CartItem, AllProduct }) => {
             <h2>Carrinho</h2>
             <div className=' d_flex'>
               <h4>Valor Total :</h4>
-              <h3>${totalPrice}.00</h3>
+              <h3>{totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h3>
               
             </div>
             <div className="d-button">

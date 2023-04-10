@@ -81,7 +81,7 @@ const FlashCard = ({ productItems, addToCart, allProduct }) => {
                     <i className='fa fa-star'></i>
                   </div>
                   <div className='price'>
-                    <h4>{productItems.price}.00 </h4>
+                    <h4>{productItems.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </h4>
                     {/* step : 3  
                      if hami le button ma click garryo bahne 
                     */}
