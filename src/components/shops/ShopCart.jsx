@@ -44,7 +44,8 @@
 
 //export default ShopCart
 
-import React, { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import searchContext from "../../contexts/SearchContext"
 
 const ShopCart = ({ shopItems, addToCart, allProduct }) => {
   const [count, setCount] = useState(0)
@@ -52,11 +53,31 @@ const ShopCart = ({ shopItems, addToCart, allProduct }) => {
     setCount(count + 1)
   }
 
+
+  const {searchProduct, setSearchProduct} = useContext(searchContext);
+
+
+  
+  let filteredProducts = allProduct?.filter((product)=>{
+     return product?.name.toLowerCase().includes(searchProduct.toLowerCase());
+  });
+
+
+
+
+ 
+
+  
+
+  
+
+  
+
   return (
     <>
-      {allProduct?.map((shopItems, index) => {
+      {filteredProducts?.map((shopItems, index) => {
         return (
-          <div className='box'>
+          <div className='box' key={index}>
             <div className='product mtop'>
               <div className='img'>
                 <span className='discount'>{shopItems.discountValue * 100}% Off</span>

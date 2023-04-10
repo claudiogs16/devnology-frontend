@@ -8,6 +8,7 @@ import Cart from "./common/Cart/Cart"
 import Footer from "./common/footer/Footer"
 import Sdata from "./components/shops/Sdata"
 import axios from "axios"
+import searchContext from "./contexts/SearchContext"
 
 function App() {
   /*
@@ -31,6 +32,13 @@ function App() {
   //Step 2 :
   const [CartItem, setCartItem] = useState([])
   const [allProduct, setAllProduct] = useState(null);
+  const [searchProduct, setSearchProduct] = useState('');
+
+
+  const search = (value => {
+    
+    // setSearchProduct(searchProduct);
+  })
 
 
   useEffect(()=>{
@@ -119,11 +127,12 @@ function App() {
 
   return (
     <>
+    <searchContext.Provider value={{searchProduct, setSearchProduct}}>
       <Router>
-        <Header CartItem={CartItem} />
+        <Header search={search} CartItem={CartItem} />
         <Switch>
           <Route path='/' exact>
-            <Pages allProduct={allProduct} productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
+            <Pages searchProduct={searchProduct} allProduct={allProduct} productItems={productItems} addToCart={addToCart} shopItems={shopItems} />
           </Route>
           <Route path='/cart' exact>
             <Cart AllProduct={allProduct} CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />
@@ -131,6 +140,7 @@ function App() {
         </Switch>
         <Footer />
       </Router>
+      </searchContext.Provider>
     </>
   )
 }

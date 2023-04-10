@@ -1,13 +1,22 @@
-import React from "react"
+import React, { useContext } from "react"
 import logo from "../../components/assets/images/logo.svg"
 import { Link } from "react-router-dom"
+import searchContext from "../../contexts/SearchContext"
 
-const Search = ({ CartItem }) => {
+const Search = ({ CartItem, search }) => {
   // fixed Header
   window.addEventListener("scroll", function () {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
+
+  const {searchProduct, setSearchProduct} = useContext(searchContext);
+
+
+  const searchProductInput = (value) => {
+    console.log(value)
+    setSearchProduct(value)
+  }
 
   return (
     <>
@@ -20,7 +29,7 @@ const Search = ({ CartItem }) => {
 
           <div className='search-box f_flex'>
             <i className='fa fa-search'></i>
-            <input type='text' placeholder='Pesquisar Produtos...' />
+            <input type='text' placeholder='Pesquisar Produtos...'  onChange={(event) => searchProductInput(event.target.value)}  />
             <span>Todas</span>
           </div>
 
